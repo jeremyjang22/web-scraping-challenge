@@ -34,7 +34,7 @@ def scrape():
     browser.visit(url2)
 
     html2 = browser.html
-    soup = BeautifulSoup(html2, "html.parser")
+    soup = BeautifulSoup(html2, 'html.parser')
 
     featured_result = soup.find('article', class_="carousel_item")["style"]
     path = featured_result.split("'")[1]
@@ -59,13 +59,15 @@ def scrape():
 
     for results in hemisphere_results:
         hemisphere_title = results.find('h3').text
-        hemisphere_image_url = "https://astrogeology.usgs.gov" + results.find('a')['href']
+        href = results.find('a')['href']
+        hemisphere_image_url = "https://astrogeology.usgs.gov" + href
 
         browser.visit(hemisphere_image_url)
         html = browser.html
 
-        soup = BeautifulSoup(html, "html.parser")
-        hemisphere_image_url_new = soup.find('div', class_="downloads").find('a')['href']
+        soup = BeautifulSoup(html, 'html.parser')
+        download = soup.find('div', class_="downloads")
+        hemisphere_image_url_new = download.find('a')['href']
 
         hemisphere_dictionary = {
             "title":hemisphere_title,
@@ -73,6 +75,8 @@ def scrape():
         }
         mars_hemispheres.append(hemisphere_dictionary)
         
+        # print(mars_hemispheres)
+
     browser.quit()
         
     Mars_Data = {

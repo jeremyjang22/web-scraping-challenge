@@ -9,44 +9,53 @@
     </head>
 
     <body>
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Mission to Mars</h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
-        </div> 
+        <div class="container-fluid" style="margin-top: 20px;">
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Mission to Mars</h1>
+                <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+            </div> 
+            <hr />
+            <h2>Latest Mars News</h2>
+            <hr />
+            <h3>{{mars.title}}</h3>
+            <p>{{mars.paragraph}}</p>
+            <hr />
 
-        <h2>Latest Mars News</h2>
-        <h3>{{mars.title}}</h3>
-        <p>{{mars.paragraph}}</p>
+            <div class="row">
+                <div class="col-sm-10 col-m-8">
+                    <hr />
+                    <h2>Featured Mars Image</h2>
+                    <hr />
+                    {% if mars.featured_image_link %}
+                    <img src="{{ mars.featured_image_link }}" class="img-fluid"/>
+                    {%endif%}
+                </div>
 
-        <div class="row">
-            <div class="col-sm-10 col-m-8">
-                <h2>Featured Mars Image</h2>
-                {% if mars.featured_image_link %}
-                <img src="{{mars.featured_image_link}}" class="img-fluid"/>
-                {%endif%}
-            </div>
-
-            <div class="col-sm-10 col-m-8">
-                <h2>Mars Facts</h2>
-                <div class="table table-responsive">
-                    {% autoescape false %}
-                    {{mars.quick_facts}}
-                    {% endautoescape %}
+                <div class="col-sm-10 col-m-8">
+                    <hr />
+                    <h2>Mars Facts</h2>
+                    <hr />
+                    <div class="table table-responsive">
+                        {% autoescape false %}
+                        {{mars.quick_facts}}
+                        {% endautoescape %}
+                    </div>
                 </div>
             </div>
-        </div>
-        <h2 class ="text-center">Mars Hemispheres</h2>
-        <div class="row container-fluid">
-            {% for hemisphere in mars.mars_hemispheres%}
-            <div class="col-sm-10 col-md-5 card">
-                <img src="{{hemisphere.url}}" class="card-img-top" alt="{{hemisphere.title}}"/>
-                <div class="card-body">
-                    <h3 class="card-title">{{hemisphere.title}}</h3>
+            <hr />
+            <h2 class ="text-center">Mars Hemispheres</h2>
+            <hr />
+            <div class="row container-fluid d-flex justify-content-around">
+                {% for hemisphere in mars.hemispheres %}
+                <div class="col-sm-10 col-md-5 card" style="margin-bottom: 30px;">
+                    <img class="card-img-top img-fluid" src="{{ hemisphere.url }}" alt="{{ hemisphere.title }}"/>
+                    <div class="card-body">
+                        <h3 class="card-title">{{hemisphere.title}}</h3>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

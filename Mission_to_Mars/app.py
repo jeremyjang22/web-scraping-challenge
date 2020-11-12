@@ -9,7 +9,6 @@ mongo = PyMongo(app, uri="mongodb://localhost:27017/mars")
 
 @app.route("/")
 def home():
-    
     mars_data = mongo.db.collection.find_one()
     return render_template("index.html", mars=mars_data)
 
