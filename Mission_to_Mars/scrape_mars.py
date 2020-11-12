@@ -29,7 +29,7 @@ def scrape():
         paragraph = ""
         print("missing info")
         
-    #featued mars images
+    #featured mars images
     url2 = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(url2)
 
@@ -45,7 +45,7 @@ def scrape():
     table = pd.read_html("https://space-facts.com/mars/")
     
     quick_facts = table[0]
-    quick_facts_html = quickgacts.to_html(index=False, header=False)
+    quick_facts_html = quick_facts.to_html(index=False, header=False)
 
     #mars hemispheres
     url3 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
